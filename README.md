@@ -4,6 +4,7 @@ A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity]
 See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/) for an online demonstration.
 
 ## Contents
+   - [Function Inputs](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#function-inputs)
    - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)
    - [JavaScript Boilerplate](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#javascript-boilerplate)
 

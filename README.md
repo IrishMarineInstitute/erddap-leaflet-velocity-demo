@@ -7,6 +7,25 @@ See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/)
    - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)
    - [JavaScript Boilerplate](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#javascript-boilerplate)
 
+## Function inputs
+
+You can add the [erddapToLeafletVelocity.js](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/erddapToLeafletVelocity.js) script to your webpages, and use the erddapToLeafletVelocity function with the following inputs:
+
+- _erddapBaseUrl_ `String`: The base URL of the Errdap server to be called - e.g. 'http://erddap.marine.ie'
+- _datasetID_ `String`: The dataset name to be accessed from the Erddap server - 'e.g. IMI_Model_Stats'
+- _uParameter_ `String`: The eastwards velocity parameter name to be accessed from the Erddap dataset - e.g. 'sea_surface_x_velocity'
+- _vParameter_  `String`: The northwards velocity parameter name to be accessed from the Erddap dataset - e.g. 'sea_surface_x_velocity'
+- _minLat_ `Number`: The southernmost latitude to be accessed from the Erddap dataset
+- _maxLat_ `Number`: The northernmost latitude to be accessed from the Erddap dataset
+- _minLon_ `Number`: The westernmost longitude to be accessed from the Erddap dataset
+- _maxLon_ `Number`: The easternmost longitude to be accessed from the Erddap dataset
+- _refTime_ `String`: The dateTime for the data to be returned from Erddap
+- _strideLon_ `Number`: The Erddap stride to use on the grid for the longitude axis as an integer value
+- _strideLat_ `Number`: The Erddap stride to use on the grid for the latitude axis as an integer value
+- _minVelocity_ `Number`: The minimum velocity to use on the Leaflet Velocity display
+- _maxVelocity_ `Number`: The maximum velocity to use on the Leaflet Velocity display
+- _mapID_ `String`: The Leaflet map ID to add the velocity layer to
+
 ## Grib2JSON output format
 
 Leaflet-Velocity expects input in the form of a JSON object conforming to the output of [Grib2JSON](https://github.com/cambecc/grib2json). Some of the fields are documented below:

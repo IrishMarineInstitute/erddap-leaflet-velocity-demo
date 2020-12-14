@@ -4,13 +4,22 @@ A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity]
 See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/) for an online demonstration.
 
 ## Contents
+   - [Including the Code](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#including-the-code)
    - [Function Inputs](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#function-inputs)
    - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)
    - [JavaScript Boilerplate](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#javascript-boilerplate)
 
-## Function inputs
+## Including the Code
 
-You can add the [erddapToLeafletVelocity.js](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/erddapToLeafletVelocity.js) script to your webpages, and use the erddapToLeafletVelocity function with the following inputs:
+To include the code in your own website, you will need to first add the [Leaflet.js](https://leafletjs.com/) mapping library, Leaflet-Velocity and then include errdapToLeafletVelocity, e.g.:
+
+```html
+<script src="https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/erddapToLeafletVelocity.js"></src>
+```
+
+## Function Inputs
+
+Once you have added the [erddapToLeafletVelocity.js](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/erddapToLeafletVelocity.js) script to your webpages, you can use the erddapToLeafletVelocity function with the following inputs:
 
 - _erddapBaseUrl_ `String`: The base URL of the Errdap server to be called - e.g. 'http://erddap.marine.ie'
 - _datasetID_ `String`: The dataset name to be accessed from the Erddap server - 'e.g. IMI_Model_Stats'

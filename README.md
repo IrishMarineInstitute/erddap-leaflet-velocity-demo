@@ -24,7 +24,7 @@ Leaflet-Velocity expects input in the form of a JSON object conforming to the ou
 - Data
     - A one-dimensional array of the parameter's data values for this point in time on the grid. Data are west-to-east across teh grid, repeating north-to-south down the grid
 
-## Javascript boilderplate
+## Javascript boilerplate
 
 The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset.
 

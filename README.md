@@ -3,7 +3,11 @@ A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity]
 
 See [here]() for an online demonstration.
 
-## Grib2Json output format
+## Contents
+   - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)
+   - JavaScript Boilerplate(https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#javascript-boilerplate)
+
+## Grib2JSON output format
 
 Leaflet-Velocity expects input in the form of a JSON object conforming to the output of [Grib2JSON](https://github.com/cambecc/grib2json). Some of the fields are documented below:
 
@@ -24,7 +28,7 @@ Leaflet-Velocity expects input in the form of a JSON object conforming to the ou
 - Data
     - A one-dimensional array of the parameter's data values for this point in time on the grid. Data are west-to-east across teh grid, repeating north-to-south down the grid
 
-## Javascript boilerplate
+## JavaScript boilerplate
 
 The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset.
 

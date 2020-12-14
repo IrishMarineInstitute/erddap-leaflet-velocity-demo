@@ -1,7 +1,7 @@
 # erddap-leaflet-velocity-demo
 A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity](https://github.com/danwild/leaflet-velocity) maps
 
-See [here]() for an online demonstration.
+See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/) for an online demonstration.
 
 ## Contents
    - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)

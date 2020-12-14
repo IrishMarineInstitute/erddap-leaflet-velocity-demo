@@ -1,5 +1,5 @@
 # erddap-leaflet-velocity-demo
-A demonstration of connecting [Erddap](https://github.com to [Leaflet-Velocity](https://github.com/danwild/leaflet-velocity) maps
+A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity](https://github.com/danwild/leaflet-velocity) maps
 
 See [here]() for an online demonstration.
 

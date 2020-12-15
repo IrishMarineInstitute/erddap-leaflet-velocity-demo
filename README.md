@@ -80,10 +80,10 @@ fetch(
 		+ datasetID 
 		+ '.json?' 
 		+ uParameter + '[(' + refTime + '):1:(' + refTime + ')][(' +  String(minLat) + '):' + String(strideLat) + ':(' + String(maxLat) + ')][(' + String(minLon) + '):'+ String(strideLon) +':(' + String(maxLon) + ')],' 
-		+ vParameter + '[(' + refTime + '):1:(' + refTime + ')][(' + String(minLat) + '):' + String(strideLat)+ ':(' + String(maxLat) + ')][(' + String(minLon) + '):' + String(strideLon) + ':(' + String(maxLon) + ')]').
-then(
-	response => response.json()
-).
+		+ vParameter + '[(' + refTime + '):1:(' + refTime + ')][(' + String(minLat) + '):' + String(strideLat)+ ':(' + String(maxLat) + ')][(' + String(minLon) + '):' + String(strideLon) + ':(' + String(maxLon) + ')]')
+		+ '&.jsonp=erddapData').
+then(response => response.text()).
+then(txt2json => JSON.parse(txt2json.replace('erddapData(','').slice(0,-1))).
 then(
 	data => [{
 		'header':{

@@ -59,7 +59,7 @@ Leaflet-Velocity expects input in the form of a JSON object conforming to the ou
 
 ## JavaScript boilerplate
 
-The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset. Contains input from @abkfenris
+The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset. Contains input from [@abkfenris](https://github.com/abkfenris).
 
 ```javascript
 const erddapBaseUrl = 'https://erddap.marine.ie';

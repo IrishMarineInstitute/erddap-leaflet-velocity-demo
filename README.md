@@ -5,6 +5,7 @@ See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/)
 
 ## Contents
    - [Including the Code](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#including-the-code)
+   - [Example Usage](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#example-usage)
    - [Function Inputs](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#function-inputs)
    - [Grib2JSON Output format](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#grib2json-output-format)
    - [JavaScript Boilerplate](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#javascript-boilerplate)
@@ -15,6 +16,25 @@ To include the code in your own website, you will need to first add the [Leaflet
 
 ```html
 <script src="https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/erddapToLeafletVelocity.js"></src>
+```
+
+## Example Usage
+
+```javascript
+L.erddapVelocityLayer({
+	erddapBaseUrl: 'https://erddap.marine.ie',
+	datasetID: 'IMI_Model_Stats',
+	uParameter: 'sea_surface_x_velocity',
+	vParameter: 'sea_surface_y_velocity',
+	minLat: 48.5,
+	maxLat: 58.5,
+	minLon: -17.0,
+	maxLon: -2.0,
+	refTime: '2019-12-15T00:00:00Z',
+	strideLon: 10,
+	strideLat: 10,
+	minVelocity: 0,
+	maxVelocity: 1}).addTo('map');
 ```
 
 ## Function Inputs

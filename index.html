@@ -1,7 +1,5 @@
 <html> 
 	<head>
-		<title>Erddap leaflet-velocity Demo | Marine Institute, Ireland</title>
-		
 		 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 		 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 		 
@@ -27,21 +25,20 @@
 				'NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
 			}
 		).addTo(mymap);
-			erddapToLeafletVelocity(
-				'https://erddap.marine.ie',
-				'IMI_Model_Stats',
-				'sea_surface_x_velocity',
-				'sea_surface_y_velocity',
-				48.5,
-				58.5,
-				-17.0,
-				-2.0,
-				'2019-12-15T00:00:00Z',
-				10,
-				10,
-				0,
-				1,
-				'map');
+		L.erddapVelocityLayer({
+			erddapBaseUrl: 'https://erddap.marine.ie',
+			datasetID: 'IMI_Model_Stats',
+			uParameter: 'sea_surface_x_velocity',
+			vParameter: 'sea_surface_y_velocity',
+			minLat: 48.5,
+			maxLat: 58.5,
+			minLon: -17.0,
+			maxLon: -2.0,
+			refTime: '2019-12-15T00:00:00Z',
+			strideLon: 10,
+			strideLat: 10,
+			minVelocity: 0,
+			maxVelocity: 1}).addTo('map');
 		</script>
 	</body>
 </html>

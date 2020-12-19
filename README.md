@@ -39,7 +39,7 @@ L.erddapVelocityLayer({
 
 ## Function Inputs
 
-Once you have added the [erddapToLeafletVelocity.js](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/erddapToLeafletVelocity.js) script to your webpages, you can use the erddapToLeafletVelocity function with the following inputs:
+Once you have added the [erddapToLeafletVelocity.js](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/erddapToLeafletVelocity.js) script to your webpages, you can use the erddapToLeafletVelocity function or the L.erddapVelocityLayer function with the following inputs:
 
 - _erddapBaseUrl_ `String`: The base URL of the Errdap server to be called - e.g. 'http://erddap.marine.ie'
 - _datasetID_ `String`: The dataset name to be accessed from the Erddap server - 'e.g. IMI_Model_Stats'

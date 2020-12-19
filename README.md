@@ -55,11 +55,11 @@ Leaflet-Velocity expects input in the form of a JSON object conforming to the ou
     - _parameterUnit_ The units of measure for the parameter
     - _refTime_ The date and time for this parameter and grid combination
 - Data
-    - A one-dimensional array of the parameter's data values for this point in time on the grid. Data are west-to-east across teh grid, repeating north-to-south down the grid
+    - A one-dimensional array of the parameter's data values for this point in time on the grid. Data are west-to-east across the grid, repeating north-to-south down the grid
 
 ## JavaScript boilerplate
 
-The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset.
+The following should allow you to build the expected output from any Erddap instance, using a griddap enabled dataset. Contains input from @abkfenris
 
 ```javascript
 const erddapBaseUrl = 'https://erddap.marine.ie';
@@ -73,18 +73,32 @@ const maxLon = -2.0;
 const refTime = '2019-12-15T00:00:00Z';
 const strideLon = 20;
 const strideLat = 20;
-	
-fetch(
-	erddapBaseUrl 
-		+ '/erddap/griddap/' 
-		+ datasetID 
-		+ '.json?' 
-		+ uParameter + '[(' + refTime + '):1:(' + refTime + ')][(' +  String(minLat) + '):' + String(strideLat) + ':(' + String(maxLat) + ')][(' + String(minLon) + '):'+ String(strideLon) +':(' + String(maxLon) + ')],' 
-		+ vParameter + '[(' + refTime + '):1:(' + refTime + ')][(' + String(minLat) + '):' + String(strideLat)+ ':(' + String(maxLat) + ')][(' + String(minLon) + '):' + String(strideLon) + ':(' + String(maxLon) + ')]')
-		+ '&.jsonp=erddapData').
-then(response => response.text()).
-then(txt2json => JSON.parse(txt2json.replace('erddapData(','').slice(0,-1))).
-then(
+
+function jsonp(url) {
+    return new Promise(function(resolve, reject) {
+        let script = document.createElement('script')
+        const name = "_jsonp_" + Math.round(100000 * Math.random());
+        //url formatting
+        if (url.match(/\?/)) url += "&.jsonp="+name
+        else url += "?.jsonp="+name
+        script.src = url;
+
+        window[name] = function(data) {
+            resolve(data);
+            document.body.removeChild(script);
+            delete window[name];
+        }
+        document.body.appendChild(script);
+    });
+}
+
+jsonp(erddapBaseUrl 
+			+ '/erddap/griddap/' 
+			+ datasetID 
+			+ '.json?' 
+			+ uParameter + '[(' + refTime + '):1:(' + refTime + ')][(' +  String(minLat) + '):' + String(strideLat) + ':(' + String(maxLat) + ')][(' + String(minLon) + '):'+ String(strideLon) +':(' + String(maxLon) + ')],' 
+			+ vParameter + '[(' + refTime + '):1:(' + refTime + ')][(' + String(minLat) + '):' + String(strideLat)+ ':(' + String(maxLat) + ')][(' + String(minLon) + '):' + String(strideLon) + ':(' + String(maxLon) + ')]')
+.then(
 	data => [{
 		'header':{
 			'la1': Math.max(...Array.from([...new Set(data.table.rows.map(x => x[1]))])),

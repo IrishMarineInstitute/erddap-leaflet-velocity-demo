@@ -161,8 +161,10 @@
 		Satellite: Esri_WorldImagery,
 		"Grey Canvas": Esri_DarkGreyCanvas
 		};
-
-	var surfTemp = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	
+	var wmsUrl = "https://data.marine.ie/ncWMS/wms" ;
+	
+	var surfTemp = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_surface_temperature',
 		format: 'image/png',
 		transparent: true,
@@ -170,56 +172,56 @@
 		
 	var surfTempTime = L.timeDimension.layer.wms(surfTemp);
 		
-	var surfSal = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var surfSal = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_surface_salinity',
 		format: 'image/png',
 		transparent: true});
 		
 	var surfSalTime = L.timeDimension.layer.wms(surfSal);
 		
-	var tenTemp = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var tenTemp = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_temperature_at_10_meters_depth',
 		format: 'image/png',
 		transparent: true});
 		
 	var tenTempTime = L.timeDimension.layer.wms(tenTemp);
 		
-	var tenSal = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var tenSal = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_salinity_at_10_meters_depth',
 		format: 'image/png',
 		transparent: true});
 		
 	var tenSalTime = L.timeDimension.layer.wms(tenSal);
 
-	var thirtyTemp = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var thirtyTemp = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_temperature_at_30_meters_depth',
 		format: 'image/png',
 		transparent: true});
 		
 	var thirtyTempTime = L.timeDimension.layer.wms(thirtyTemp);
 
-	var thirtySal = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var thirtySal = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_salinity_at_30_meters_depth',
 		format: 'image/png',
 		transparent: true});
 		
 	var thirtySalTime = L.timeDimension.layer.wms(thirtySal)
 
-	var bottomTemp = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var bottomTemp = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_bottom_temperature',
 		format: 'image/png',
 		transparent: true});
 		
 	var bottomTempTime =  L.timeDimension.layer.wms(bottomTemp);
 		
-	var bottomSal = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var bottomSal = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/sea_bottom_salinity',
 		format: 'image/png',
 		transparent: true});
 		
 	var bottomSalTime =  L.timeDimension.layer.wms(bottomSal);
 		
-	var mixedDepth = L.tileLayer.wms("http://data.marine.ie/ncWMS/wms", {
+	var mixedDepth = L.tileLayer.wms(wmsUrl, {
 		layers: 'COMPASS_NEATL_202009/mixed_layer_depth',
 		format: 'image/png',
 		transparent: true});

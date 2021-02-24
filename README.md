@@ -3,6 +3,8 @@ A demonstration of connecting [Erddap](https://github.com) to [Leaflet-Velocity]
 
 See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/) for an online demonstration.
 
+See [here](https://irishmarineinstitute.github.io/erddap-leaflet-velocity-demo/time-dimension-example/) for example with time dimension control.
+
 ## Contents
    - [Including the Code](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#including-the-code)
    - [Example Usage](https://github.com/IrishMarineInstitute/erddap-leaflet-velocity-demo/blob/main/README.md#example-usage)

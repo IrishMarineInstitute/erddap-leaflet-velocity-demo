@@ -1,20 +1,142 @@
 <html> 
 	<head>
-		 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-		 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-		 <link rel="stylesheet" href="https://danwild.github.io/leaflet-velocity/dist/leaflet-velocity.min.css" />
-		 <script src="https://danwild.github.io/leaflet-velocity/dist/leaflet-velocity.js" crossorigin=""></script>
-		 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css" />
-		 <style>
-		 	#map{height: 100%}
-		 </style>
+
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+		<link rel="stylesheet" href="https://danwild.github.io/leaflet-velocity/dist/leaflet-velocity.min.css" />
+		<script src="https://danwild.github.io/leaflet-velocity/dist/leaflet-velocity.js" crossorigin=""></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css" />
+		<link rel="stylesheet" href="https://irishmarineinstitute.github.io/erddap-js/demo/siimple.css">
+		<!-- jQuery library -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<!-- Latest compiled JavaScript for bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+		<!-- Highcharts CDNs -->
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/series-label.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/export-data.js"></script>
+		<script src="https://code.highcharts.com/highcharts-more.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+		<script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+
+		<style>
+		#map{
+			height: 98%;
+		}	
+		#time-ranges {
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+			z-index: 1000;
+			padding: 1em;
+			background: white;
+		}
+		#time-ranges input {
+			display: inline-block;
+			border: 1px solid #999;
+			font-size: 14px;
+			border-radius: 4px;
+			height: 28px;
+			line-height: 28px;
+		}
+		#time-ranges input[type='button'] {
+			box-sizing: content-box;
+			padding: 0 1em;
+			text-transform: uppercase;
+			color: white;
+			background: #5C7DB8;
+			border-color: #5C7DB8;
+		}
+		#loader{
+            position: relative;
+            top: 50%;
+            left: 50%;
+            margin: 0 0 0 -10px;
+			display: none;
+        }
+		.hide {
+			display: none;
+		}
+		.instructions:hover + .hide {
+			display: block;
+			width: 100%;
+			text-align: center;
+			margin-top: 10px;
+		}
+		</style>
+		<title>COMPASS - Model Visualization</title>
 	</head>
 	<body>
-		<p id="err"></p>
+		<div class="instructions" align ="center" style="font-weight: bold;">Instructions</div>
+		<div class="hide">
+			<p><strong>Layer Control: </strong>Use control on top-right of the map to select layer to view on map</p>
+			<p><strong>Time Dimension: </strong>Use control on bottom-left of the map to use time dimension capabilities of each layer</p>
+			<p><strong>Date Range: </strong>Use control on bottom-right of map to select dates range to filter data</p>
+			<p><strong>Location: </strong>Click on map to view Temperature and Salinity time-series plots for a specific location</p>
+			<p><strong>Plots: </strong>Use chart context menu on top-right of each plot for download options</p>
+		</div>
+		<div id="time-ranges" class="leaflet-bar">
+			<form action="#" id="form">
+				<label for="from">
+				From
+				<input id="from" type="date" value="2016-01-01" name="from">
+				</label>
+				<label for="to">
+				To
+				<input  id="to" type="date" value="2020-12-31" name="to">
+				</label>
+				<input type="button" value="Update" onclick="updateTimeRange()">
+			</form>
+		</div>
 		<div id="map"></div>
-        	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
-        	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
+		<!-- leaflet map... -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+		<link rel="stylesheet" href="https://npmcdn.com/leaflet@1.1.0/dist/leaflet.css" />
+		<script src="https://npmcdn.com/leaflet@1.1.0/dist/leaflet.js"></script>
+		<!--leaflet-velocity-->
+		<!--leaflet-timedimension-->
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.js"></script>
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.util.js"></script>
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.layer.js"></script>
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.layer.wms.js"></script>
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.player.js"></script>
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.control.js"></script>
+		<!--leaflet-velocity-->
+		<link rel="stylesheet" href="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet-velocity.min.css" />
+		<script src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet-velocity.min.js"></script>
+		<!--timedimension-velocity-layer-->
+		<link rel="stylesheet" href="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.control.css" />
+		<script type="text/javascript" src="https://irishmarineinstitute.github.io/erddap-js/demo/02-leaflet-time-dimension-velocity/leaflet.timedimension.layer.velocity.js"></script>
+		<!--groupedlayer-control-->
 		<script type="text/javascript" src="https://ismyrnow.github.io/leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js"></script>
+		<!-- erddap -->
+		<script src="erddap.js"></script>
+		<!-- example app -->
 		<script src="maps.js"></script>
+		<!-- Image loader-->
+		<div class="col-xl-6 col-md-12 mb-8">
+			<div id='loader' style="width: 50%; float: center;">
+				<img src='loader.gif'>
+			</div>
+		</div>
+		<section id="charts">
+			<div class="container">
+				<!-- Water temp graph -->
+				<div class="row">
+					<div class="col-xl-6 col-md-12 mb-8">
+						<div id="temp" style="width: 50%; float: left;"></div>
+						<script src="temperature.js"></script>
+					</div>
+					<!-- Water salinity graph -->
+					<div class="col-xl-6 col-md-12 mb-8">
+						<div id="sal"style="width: 50%; float: right;"></div>
+						<script src="salinity.js"></script>
+					</div>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
